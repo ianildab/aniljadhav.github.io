@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CV: Anil - Salesforce Technical Lead</title>
+    <!-- React and Babel for in-browser JSX transformation -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --header-bg: #0070d2; /* Salesforce Blue */
+            --text-primary: #080707;
+            --text-secondary: #54698d;
+            --border-color: #dddbda;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --accent-color: #0070d2;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            font-family: 'Salesforce Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #root {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .cv-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            overflow: hidden; /* To contain the header's color */
+        }
+
+        .cv-header {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .cv-header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 600;
+        }
+
+        .cv-header h2 {
+            margin: 8px 0 0 0;
+            font-size: 1.5em;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .cv-summary {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+            font-size: 1.1em;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .linkedin-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 6px 14px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .linkedin-link:hover {
+            background-color: white;
+            color: var(--header-bg);
+        }
+
+        .cv-body {
+            padding: 32px;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .cv-section {
+            margin-bottom: 32px;
+        }
+
+        .cv-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .cv-section h3 {
+            font-size: 1.4em;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin: 0 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .about-text {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .skill-list, .cert-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skill-item, .cert-item {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--accent-color);
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 1.05em;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .skill-item i, .cert-item i {
+            color: var(--accent-color);
+            font-size: 1.1em;
+        }
+        .experience-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .experience-item {
+            padding-left: 20px;
+            border-left: 3px solid var(--border-color);
+        }
+
+        .experience-company {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .experience-company .location {
+            font-size: 0.9em;
+            font-weight: 400;
+            color: var(--text-secondary);
+            margin-left: 8px;
+        }
+
+        .role-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .role-title {
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        .role-meta {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { Fragment } = React;
+
+        // --- CV Data ---
+        const cvData = {
+            name: "Anil Jadhav",
+            title: "Salesforce Technical Lead",
+            experience: "10 Years",
+            linkedin: "https://in.linkedin.com/in/anil-jadhav-5402a035",
+            certificationCount: "14x Salesforce Certified",
+            workExperience: [
+                {
+                    company: "Cognizant",
+                    location: "Pune, Maharashtra, India",
+                    roles: [
+                        {
+                            title: "Salesforce Technical Lead",
+                            period: "Jan 2022 - Present",
+                            duration: "3 years 8 months"
+                        },
+                        {
+                            title: "Salesforce Developer",
+                            period: "Dec 2018 - Dec 2021",
+                            duration: "3 years 1 month"
+                        }
+                    ]
+                },
+                {
+                    company: "Infosys",
+                    roles: [
+                        { title: "Senior Salesforce Developer", period: "Oct 2017 - Nov 2018", duration: "1 year 2 months" }
+                    ]
+                },
+                {
+                    company: "Capgemini",
+                    roles: [
+                        { title: "Salesforce Developer", period: "Mar 2015 - Sep 2017", duration: "2 years 7 months" }
+                    ]
+                }
+            ],
+            summary: "A Salesforce Technical Lead with around 10 years of experience comprising of Salesforce Configuration, Customization and Integration experience. During this tenure, involved in various implementations on Salesforce.com / Force.com.",
+            skills: [
+                "Understanding the Business requirement and Functional specification documents.",
+                "Customization & Implementation of SFDC Application using Apex, Visualforce, Triggers, etc.",
+                "End-to-End Configuration of Salesforce.com Application.",
+                "Excellent understanding of Salesforce Security Model.",
+                "Good Experience in CRM Fundamentals.",
+                "Deployment Experience using ANT Tool.",
+                "Experience working with Force.com IDE and Salesforce.com Sandbox environments.",
+                "Good knowledge of Integration using REST APIs.",
+                "Maintaining coding standards and best practices set by Salesforce.",
+                "Resolving defects/issues and providing necessary enhancements."
+            ],
+            certifications: [
+                "Salesforce AI Associate",
+                "Salesforce Certified Data Architect",
+                "Salesforce Certified Data Cloud Consultant",
+                "Salesforce Certified Sales Cloud Consultant",
+                "Salesforce Certified Experience Cloud Consultant",
+                "Salesforce Certified Force.com Administrator",
+                "Salesforce Certified Force.com Platform Developer I",
+                "Salesforce Certified Force.com Platform Developer II",
+                "Salesforce Certified Force.com Service Cloud Consultant",
+                "Salesforce Certified Force.com App Builder",
+                "Salesforce Certified Force.com Advance Administrator",
+                "Salesforce Certified Force.com Field Service Lightning Consultant",
+                "Salesforce Certified Javascript Developer",
+                "Salesforce Certified Agentforce Specialist"
+            ]
+        };
+
+        // --- Components ---
+
+        function CVHeader({ name, title, experience, certificationCount, linkedinUrl }) {
+            return (
+                <header className="cv-header">
+                    <h1>{name}</h1>
+                    <h2>{title}</h2>
+                    <div className="cv-summary">
+                        <div className="summary-item">
+                            <span>{experience} Experience</span>
+                        </div>
+                        <div className="summary-item">
+                            <span>{certificationCount}</span>
+                        </div>
+                        {linkedinUrl && (
+                            <div className="summary-item">
+                                <a href={linkedinUrl} target="_blank" rel="noopener noreferrer" className="linkedin-link">
+                                    <i className="fa-brands fa-linkedin"></i> LinkedIn
+                                </a>
+                            </div>
+                        )}
+                    </div>
+                </header>
+            );
+        }
+
+        function CVSection({ title, icon, children }) {
+            return (
+                <section className="cv-section">
+                    <h3>
+                        {icon && <i className={icon}></i>}
+                        <span>{title}</span>
+                    </h3>
+                    {children}
+                </section>
+            );
+        }
+
+        function WorkExperience({ experience }) {
+            return (
+                <ul className="experience-list">
+                    {experience.map((job, index) => (
+                        <li key={index} className="experience-item">
+                            <div className="experience-company">
+                                {job.company}
+                                {job.location && <span className="location">&bull; {job.location}</span>}
+                            </div>
+                            <ul className="role-list">
+                                {job.roles.map((role, rIndex) => (
+                                    <li key={rIndex} className="role-item">
+                                        <div className="role-title">{role.title}</div>
+                                        <div className="role-meta">{role.period} &bull; {role.duration}</div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
+
+        // --- Main App Component ---
+        function CVApp() {
+            return (
+                <div className="cv-container">
+                    <CVHeader 
+                        name={cvData.name}
+                        title={cvData.title}
+                        experience={cvData.experience}
+                        linkedinUrl={cvData.linkedin}
+                        certificationCount={cvData.certificationCount}
+                    />
+                    <main className="cv-body">
+                        <CVSection title="About Me" icon="fa-solid fa-user-tie">
+                            <p className="about-text">{cvData.summary}</p>
+                        </CVSection>
+
+                        <CVSection title="Work Experience" icon="fa-solid fa-briefcase">
+                            <WorkExperience experience={cvData.workExperience} />
+                        </CVSection>
+
+                        <CVSection title="Key Skills" icon="fa-solid fa-gears">
+                            <ul className="skill-list">
+                                {cvData.skills.map((skill, index) => (
+                                    <li key={index} className="skill-item"><i className="fa-solid fa-check-circle"></i> <span>{skill}</span></li>
+                                ))}
+                            </ul>
+                        </CVSection>
+
+                        <CVSection title="Salesforce Certifications" icon="fa-solid fa-award">
+                             <ul className="cert-list">
+                                {cvData.certifications.map((cert, index) => (
+                                    <li key={index} className="cert-item"><i className="fa-solid fa-trophy"></i> <span>{cert}</span></li>
+                                ))}
+                            </ul>
+                        </CVSection>
+                    </main>
+                </div>
+            );
+        }
+
+        // Render the App component into the 'root' div
+        const container = document.getElementById('root');
+        const root = ReactDOM.createRoot(container);
+        root.render(<CVApp />);
+    </script>
+</body>
+</html>
